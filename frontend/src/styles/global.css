@@ -1,0 +1,86 @@
+:root {
+    --orange: #e95b0c;
+    --orange-soft: #fff0e7;
+
+    --black: #111111;
+    --text: #242424;
+    --muted: #737987;
+
+    --background: #f8f9fa;
+    --white: #ffffff;
+
+    --border: #e4e7eb;
+    --chip: #eceff3;
+
+    --todo-bg: #ffe4e4;
+    --todo-text: #f25f5f;
+
+    --progress-bg: #fff0d7;
+    --progress-text: #e7a034;
+
+    --done-bg: #def7e8;
+    --done-text: #32a968;
+
+    --content-width: 1280px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    min-width: 320px;
+    background: var(--background);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img,
+svg {
+    display: block;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

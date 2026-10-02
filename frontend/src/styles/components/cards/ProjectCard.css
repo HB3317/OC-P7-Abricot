@@ -1,0 +1,192 @@
+.project-card {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    min-height: 351px;
+
+    padding: 34px 34px 32px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #1f1f1f;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.project-card__heading h2 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.project-card__heading p {
+    display: -webkit-box;
+
+    margin: 14px 0 0;
+
+    overflow: hidden;
+
+    color: #6b7280;
+
+    font-size: 14px;
+    line-height: 1.35;
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.project-card__progress {
+    margin-top: 57px;
+}
+
+.project-card__progress-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+.project-card__progress-heading strong {
+    color: #1f1f1f;
+
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.project-card__progress-bar {
+    width: 100%;
+    height: 7px;
+
+    margin-top: 18px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e5e7eb;
+}
+
+.project-card__progress-bar span {
+    display: block;
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: #d3590b;
+
+    transition: width 0.2s ease;
+}
+
+.project-card__progress > p {
+    margin: 10px 0 0;
+
+    color: #6b7280;
+
+    font-size: 11px;
+}
+
+.project-card__team {
+    margin-top: auto;
+}
+
+.project-card__team-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+.project-card__people {
+    display: flex;
+    align-items: center;
+
+    margin-top: 17px;
+}
+
+.project-card__current-user,
+.project-card__others span {
+    display: grid;
+    place-items: center;
+
+    width: 27px;
+    height: 27px;
+
+    flex: none;
+
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+
+    font-size: 11px;
+}
+
+.project-card__current-user {
+    background: #ffe8d9;
+    color: #1f1f1f;
+}
+
+.project-card__role {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 27px;
+
+    margin-left: 5px;
+    padding: 0 17px;
+
+    border-radius: 999px;
+
+    background: #ffe8d9;
+    color: #d3590b;
+
+    font-size: 12px;
+}
+
+.project-card__others {
+    display: flex;
+
+    margin-left: 5px;
+}
+
+.project-card__others span {
+    margin-left: -6px;
+
+    background: #e5e7eb;
+    color: #1f1f1f;
+}
+
+.project-card__others span:first-child {
+    margin-left: 0;
+}
+
+.project-card:hover {
+    border-color: #d1d5db;
+}
+
+@media (max-width: 800px) {
+    .project-card {
+        min-height: 330px;
+
+        padding: 28px;
+    }
+
+    .project-card__progress {
+        margin-top: 42px;
+    }
+}

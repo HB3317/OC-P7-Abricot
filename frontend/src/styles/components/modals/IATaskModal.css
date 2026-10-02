@@ -1,0 +1,215 @@
+.ia-task-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: grid;
+    place-items: center;
+
+    padding: 20px;
+
+    background: rgb(15 15 15 / 35%);
+}
+
+.ia-task-modal {
+    position: relative;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    width: min(598px, 100%);
+    max-height: calc(100vh - 40px);
+
+    overflow-y: auto;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+}
+
+.ia-task-modal--create {
+    min-height: 797px;
+
+    padding:
+        84px
+        52px
+        77px;
+}
+
+.ia-task-modal--list {
+    min-height: 859px;
+
+    padding:
+        84px
+        52px
+        39px;
+}
+
+.ia-task-modal__close {
+    position: absolute;
+
+    top: 36px;
+    right: 37px;
+
+    display: grid;
+    place-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+.ia-task-modal__title {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.ia-task-modal__title h2 {
+    margin: 0;
+
+    color: #1f1f1f;
+
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.ia-task-prompt {
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 61px;
+
+    margin-top: auto;
+    padding:
+        0
+        30px
+        0
+        32px;
+
+    border-radius: 999px;
+
+    background: #f8f9fa;
+}
+
+.ia-task-prompt > span {
+    color: #1f1f1f;
+
+    font-size: 10px;
+}
+
+.ia-task-prompt > button {
+    display: grid;
+    place-items: center;
+
+    width: 24px;
+    height: 24px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+.ia-task-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+
+    margin-top: 42px;
+}
+
+.ia-task-list__add {
+    align-self: center;
+
+    width: 182px;
+    height: 50px;
+
+    margin-top: 24px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #1f1f1f;
+    color: #ffffff;
+
+    font: inherit;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.ia-task-modal--list
+.ia-task-prompt {
+    margin-top: 48px;
+}
+
+@media (max-width: 640px) {
+    .ia-task-overlay {
+        padding: 12px;
+    }
+
+    .ia-task-modal {
+        max-height:
+            calc(100vh - 24px);
+    }
+
+    .ia-task-modal--create,
+    .ia-task-modal--list {
+        min-height:
+            calc(100vh - 24px);
+
+        padding:
+            72px
+            24px
+            28px;
+    }
+
+    .ia-task-modal__close {
+        top: 24px;
+        right: 24px;
+    }
+
+    .ia-task-modal__title h2 {
+        font-size: 23px;
+    }
+
+    .ia-task-list {
+        margin-top: 36px;
+    }
+
+    .ia-task-modal--list
+    .ia-task-prompt {
+        margin-top: 36px;
+    }
+
+    .ia-task-prompt {
+        padding:
+            0
+            20px;
+    }
+
+    .ia-task-prompt > span {
+        max-width:
+            calc(100% - 40px);
+    }
+}

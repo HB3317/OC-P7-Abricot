@@ -1,0 +1,111 @@
+.anonymousHeader {
+    position: relative;
+    z-index: 20;
+    height: 94px;
+    background: var(--white);
+    box-shadow: 0 4px 12px 1px rgb(0 0 0 / 2%);
+}
+
+.anonymousHeaderInner {
+    display: flex;
+    align-items: center;
+    width: min(1240px, calc(100% - 48px));
+    height: 100%;
+    margin: 0 auto;
+}
+
+.anonymousLogo {
+    display: block;
+    width: 147px;
+    aspect-ratio: 252.57 / 32.17;
+    background: #D3590B;
+    -webkit-mask:
+        url("/assets/logo-abricot.svg")
+        center / contain no-repeat;
+    mask:
+        url("/assets/logo-abricot.svg")
+        center / contain no-repeat;
+}
+
+.main {
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.content {
+    width: min(100%, 560px);
+    padding: 48px 24px;
+}
+
+.code {
+    margin: 0;
+    color: var(--orange);
+    font-size: clamp(80px, 14vw, 150px);
+    font-weight: 700;
+    line-height: 0.9;
+}
+
+.content h1 {
+    margin-top: 28px;
+}
+
+.message {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 16px;
+}
+
+.action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    margin-top: 32px;
+    padding: 0 28px;
+    border-radius: 10px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.action:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 800px) {
+    .anonymousHeader {
+        height: 78px;
+    }
+
+    .anonymousHeaderInner {
+        width: calc(100% - 24px);
+    }
+
+    .anonymousLogo {
+        width: clamp(92px, 18vw, 120px);
+    }
+
+    .content {
+        padding: 36px 16px;
+    }
+
+    .message {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 380px) {
+    .anonymousHeaderInner {
+        width: calc(100% - 16px);
+    }
+
+    .anonymousLogo {
+        width: 92px;
+    }
+
+    .action {
+        width: 100%;
+    }
+}

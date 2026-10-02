@@ -1,0 +1,73 @@
+.ia-task-card {
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 146px;
+
+    padding: 26px 39px 24px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    background: #ffffff;
+}
+
+.ia-task-card h3 {
+    margin: 0;
+
+    color: #1f1f1f;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.ia-task-card p {
+    margin: 7px 0 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+.ia-task-card__actions {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.ia-task-card__actions button {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+    color: #6b7280;
+
+    font: inherit;
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.ia-task-card__actions > span {
+    width: 1px;
+    height: 14px;
+
+    background: #9ca3af;
+}
+
+@media (max-width: 640px) {
+    .ia-task-card {
+        min-height: 0;
+
+        padding: 22px 24px;
+    }
+}

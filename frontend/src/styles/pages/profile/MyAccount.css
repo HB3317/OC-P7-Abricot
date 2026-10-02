@@ -1,0 +1,115 @@
+.my-account-page {
+    width: 100%;
+    padding: 56px 64px 80px;
+}
+
+.my-account-card {
+    width: 100%;
+    max-width: 1216px;
+    margin: 0 auto;
+    padding: 40px 58px;
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 10px;
+}
+
+.my-account-heading {
+    margin-bottom: 42px;
+}
+
+.my-account-heading h1 {
+    margin: 0 0 6px;
+    color: #1f1f1f;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.my-account-heading p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.my-account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.my-account-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    color: #1f1f1f;
+    font-size: 14px;
+}
+
+.my-account-field input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 53px;
+    padding: 0 16px;
+    border: 1px solid #d9dde3;
+    border-radius: 4px;
+    background: #ffffff;
+    color: #1f1f1f;
+    outline: none;
+}
+
+.my-account-field input:focus {
+    border-color: #9ca3af;
+}
+
+.my-account-field input::placeholder {
+    color: #9ca3af;
+}
+
+.my-account-field small {
+    color: #c62828;
+    font-size: 12px;
+}
+
+.my-account-message {
+    margin: -5px 0 0;
+    font-size: 13px;
+}
+
+.my-account-message--error {
+    color: #c62828;
+}
+
+.my-account-message--success {
+    color: #287a3d;
+}
+
+.my-account-submit {
+    width: fit-content;
+    min-width: 242px;
+    height: 50px;
+    margin-top: 16px;
+    padding: 0 28px;
+    border: 0;
+    border-radius: 9px;
+    background: #1f1f1f;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.my-account-submit:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+@media (max-width: 800px) {
+    .my-account-page {
+        padding: 28px 20px 48px;
+    }
+
+    .my-account-card {
+        padding: 30px 24px;
+    }
+
+    .my-account-submit {
+        width: 100%;
+    }
+}

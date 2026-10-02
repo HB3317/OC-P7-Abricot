@@ -1,0 +1,176 @@
+.dashboard-kanban-card {
+    display: flex;
+    width: 100%;
+    min-height: 230px;
+
+    padding: 24px 39px 24px 40px;
+
+    flex-direction: column;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    background: #ffffff;
+}
+
+.dashboard-kanban-card__heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.dashboard-kanban-card h3 {
+    margin: 0;
+
+    min-width: 0;
+
+    color: #1f1f1f;
+
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.dashboard-kanban-card__status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 25px;
+    padding: 0 15px;
+
+    flex: none;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+.dashboard-kanban-card__status--todo {
+    background: #ffe0e0;
+    color: #ef4444;
+}
+
+.dashboard-kanban-card__status--progress {
+    background: #fff0d7;
+    color: #e08d00;
+}
+
+.dashboard-kanban-card__status--done {
+    background: #f1fff7;
+    color: #27ae60;
+}
+
+.dashboard-kanban-card__status--cancelled {
+    background: #e5e7eb;
+    color: #6b7280;
+}
+
+.dashboard-kanban-card__description {
+    margin: 7px 0 0;
+
+    overflow: hidden;
+
+    color: #6b7280;
+
+    font-size: 12px;
+    line-height: 1.35;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dashboard-kanban-card__infos {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-top: 31px;
+
+    overflow: hidden;
+}
+
+.dashboard-kanban-card__info {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    min-width: 0;
+
+    color: #6b7280;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+.dashboard-kanban-card__info img {
+    width: 16px;
+    height: 16px;
+
+    flex: none;
+
+    object-fit: contain;
+}
+
+.dashboard-kanban-card__separator {
+    width: 1px;
+    height: 10px;
+
+    flex: none;
+
+    background: #9ca3af;
+}
+
+.dashboard-kanban-card__view {
+    width: 121px;
+    height: 50px;
+
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #1f1f1f;
+    color: #ffffff;
+
+    font: inherit;
+    font-size: 12px;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .dashboard-kanban-card {
+        padding: 20px;
+    }
+
+    .dashboard-kanban-card__heading {
+        gap: 10px;
+    }
+
+    .dashboard-kanban-card__infos {
+        flex-wrap: wrap;
+        overflow: visible;
+    }
+}
+
+@media (max-width: 800px) {
+    .dashboard-kanban-card {
+        min-height: 210px;
+    }
+
+    .dashboard-kanban-card__description {
+        white-space: normal;
+    }
+}

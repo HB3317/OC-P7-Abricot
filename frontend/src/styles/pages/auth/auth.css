@@ -1,0 +1,244 @@
+.auth-page {
+    position: relative;
+    min-height: 100dvh;
+    overflow: hidden;
+    background: #F9FAFB;
+}
+
+.auth-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.auth-panel {
+    position: relative;
+    z-index: 1;
+    width: 562px;
+    min-height: 100dvh;
+    background: #F9FAFB;
+}
+
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+
+.auth-logo {
+    position: absolute;
+    top: 93px;
+    left: 154px;
+    width: 253px;
+    height: auto;
+}
+
+
+/* ============================================================
+   FORMULAIRE
+   ============================================================ */
+
+.auth-form {
+    position: absolute;
+    left: 140px;
+    width: 282px;
+}
+
+.auth-login .auth-form {
+    top: 333px;
+}
+
+.auth-register .auth-form {
+    top: 352px;
+}
+
+.auth-title {
+    margin: 0 0 31px;
+    color: #D3590B;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.auth-field + .auth-field {
+    margin-top: 29px;
+}
+
+.auth-field label {
+    color: #0F0F0F;
+    font-size: 14px;
+}
+
+.auth-input {
+    width: 100%;
+    height: 52px;
+    padding: 0 14px;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    background: white;
+    color: #0F0F0F;
+}
+
+
+/* ============================================================
+   BOUTON
+   ============================================================ */
+
+.auth-submit {
+    display: block;
+    height: 50px;
+    margin: 29px auto 0;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: #1F1F1F;
+    color: white;
+    font-size: 16px;
+}
+
+.auth-login .auth-submit {
+    width: 249px;
+}
+
+.auth-register .auth-submit {
+    width: 217px;
+}
+
+.auth-submit:disabled {
+    cursor: default;
+    opacity: 0.6;
+}
+
+
+/* ============================================================
+   ERREURS
+   ============================================================ */
+
+.auth-error {
+    margin: 12px 0 0;
+    color: #EF4444;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+
+/* ============================================================
+   MOT DE PASSE OUBLIE
+   Navigation non définie pour l'instant.
+   ============================================================ */
+
+.auth-forgot-password {
+    display: block;
+    margin-top: 19px;
+    color: #D3590B;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   LIEN LOGIN / REGISTER
+   ============================================================ */
+
+.auth-navigation {
+    position: absolute;
+    left: 140px;
+    width: 282px;
+    margin: 0;
+    color: #0F0F0F;
+    font-size: 14px;
+    text-align: center;
+}
+
+.auth-login .auth-navigation {
+    bottom: 91px;
+}
+
+.auth-register .auth-navigation {
+    bottom: 109px;
+}
+
+.auth-navigation a {
+    margin-left: 7px;
+    color: #D3590B;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 800px) {
+    .auth-background {
+        display: none;
+    }
+
+    .auth-panel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 40px 20px 30px;
+    }
+
+    .auth-logo,
+    .auth-form,
+    .auth-navigation {
+        position: static;
+    }
+
+    .auth-logo {
+        width: min(253px, 72vw);
+    }
+
+    .auth-form,
+    .auth-login .auth-form,
+    .auth-register .auth-form {
+        width: min(100%, 360px);
+        margin-top: 130px;
+    }
+
+    .auth-navigation,
+    .auth-login .auth-navigation,
+    .auth-register .auth-navigation {
+        width: 100%;
+        margin-top: auto;
+        padding-top: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-panel {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .auth-form,
+    .auth-login .auth-form,
+    .auth-register .auth-form {
+        margin-top: 100px;
+    }
+
+    .auth-title {
+        font-size: 34px;
+    }
+
+    .auth-submit,
+    .auth-login .auth-submit,
+    .auth-register .auth-submit {
+        width: 100%;
+    }
+}
