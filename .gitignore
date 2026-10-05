@@ -7,3 +7,7 @@ dist/
 
 *.log
 backend/prisma/db.sqlite
+
+frontend/next-env.d.ts
+
+frontend/AGENTS.md

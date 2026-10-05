@@ -201,17 +201,7 @@ export default function SingleProjectView({
 
     const visibleTasks =
         project && currentUser
-            ? tasks.filter(
-                  (task) =>
-                      isOwner ||
-                      task.assignees.some(
-                          (assignee) =>
-                              assignee.user?.id ===
-                                  currentUser.id ||
-                              assignee.userId ===
-                                  currentUser.id
-                      )
-              )
+            ? tasks
             : [];
 
     useEffect(() => {
