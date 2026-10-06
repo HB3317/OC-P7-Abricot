@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import type {
     Task,
@@ -10,6 +9,7 @@ import "@/styles/components/cards/DashboardListCard.css";
 
 type DashboardListCardProps = {
     task: Task;
+    onView: (task: Task) => void;
 };
 
 function getStatusLabel(status: TaskStatus) {
@@ -51,6 +51,7 @@ function formatDate(date: string | null) {
 
 export default function DashboardListCard({
     task,
+    onView,
 }: DashboardListCardProps) {
     const dueDate = formatDate(task.dueDate);
 
@@ -122,12 +123,13 @@ export default function DashboardListCard({
                     {getStatusLabel(task.status)}
                 </span>
 
-                <Link
-                    href={`/projects/${task.projectId}#task-${task.id}`}
+                <button
+                    type="button"
                     className="dashboard-list-card__view"
+                    onClick={() => onView(task)}
                 >
                     Voir
-                </Link>
+                </button>
             </div>
         </article>
     );

@@ -24,6 +24,7 @@ type ProjectTaskCardProps = {
     task: Task;
     projectId: string;
     currentUser: User;
+    initiallyExpanded?: boolean;
     onModify: (task: Task) => void;
     onCancel: (task: Task) => void;
 };
@@ -129,11 +130,12 @@ export default function ProjectTaskCard({
     task,
     projectId,
     currentUser,
+    initiallyExpanded = false,
     onModify,
     onCancel,
 }: ProjectTaskCardProps) {
     const [expanded, setExpanded] =
-        useState(false);
+        useState(initiallyExpanded);
 
     const [optionsOpen, setOptionsOpen] =
         useState(false);

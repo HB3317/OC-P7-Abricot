@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import type {
     Task,
@@ -10,6 +9,7 @@ import "@/styles/components/cards/DashboardKanbanCard.css";
 
 type DashboardKanbanCardProps = {
     task: Task;
+    onView: (task: Task) => void;
 };
 
 function getStatusLabel(status: TaskStatus) {
@@ -51,6 +51,7 @@ function formatDate(date: string | null) {
 
 export default function DashboardKanbanCard({
     task,
+    onView,
 }: DashboardKanbanCardProps) {
     const dueDate = formatDate(task.dueDate);
 
@@ -121,12 +122,13 @@ export default function DashboardKanbanCard({
                 </span>
             </div>
 
-            <Link
-                href={`/projects/${task.projectId}#task-${task.id}`}
+            <button
+                type="button"
                 className="dashboard-kanban-card__view"
+                onClick={() => onView(task)}
             >
                 Voir
-            </Link>
+            </button>
         </article>
     );
 }

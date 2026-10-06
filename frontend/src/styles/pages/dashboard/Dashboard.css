@@ -363,3 +363,46 @@
     flex-direction: column;
     gap: 17px;
 }
+
+
+
+/* =========================
+   DÉTAIL D'UNE TÂCHE
+   ========================= */
+
+.dashboard-task-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    overflow-y: auto;
+
+    background: rgb(15 15 15 / 35%);
+}
+
+.dashboard-task-modal {
+    width: min(900px, 100%);
+    max-height: calc(100vh - 80px);
+
+    overflow-y: auto;
+
+    border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+    .dashboard-task-overlay {
+        align-items: flex-start;
+
+        padding: 20px 10px;
+    }
+
+    .dashboard-task-modal {
+        max-height: calc(100vh - 40px);
+    }
+}
