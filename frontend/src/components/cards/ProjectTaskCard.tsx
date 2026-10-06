@@ -24,7 +24,6 @@ type ProjectTaskCardProps = {
     task: Task;
     projectId: string;
     currentUser: User;
-    isOwner: boolean;
     onModify: (task: Task) => void;
     onCancel: (task: Task) => void;
 };
@@ -130,7 +129,6 @@ export default function ProjectTaskCard({
     task,
     projectId,
     currentUser,
-    isOwner,
     onModify,
     onCancel,
 }: ProjectTaskCardProps) {
@@ -300,25 +298,24 @@ export default function ProjectTaskCard({
                     )}
                 </div>
 
-                {isOwner && (
-                    <div
-                        ref={optionsWrapperRef}
-                        className="project-task-card__options-wrapper"
-                        onPointerEnter={(event) => {
-                            if (
-                                event.pointerType === "mouse"
-                            ) {
-                                cancelOptionsClose();
-                            }
-                        }}
-                        onPointerLeave={(event) => {
-                            if (
-                                event.pointerType === "mouse"
-                            ) {
-                                scheduleOptionsClose();
-                            }
-                        }}
-                    >
+                <div
+                    ref={optionsWrapperRef}
+                    className="project-task-card__options-wrapper"
+                    onPointerEnter={(event) => {
+                        if (
+                            event.pointerType === "mouse"
+                        ) {
+                            cancelOptionsClose();
+                        }
+                    }}
+                    onPointerLeave={(event) => {
+                        if (
+                            event.pointerType === "mouse"
+                        ) {
+                            scheduleOptionsClose();
+                        }
+                    }}
+                >
                     <button
                         type="button"
                         className="project-task-card__options"
@@ -339,31 +336,30 @@ export default function ProjectTaskCard({
                         />
                     </button>
 
-                        {optionsOpen && (
-                            <div className="project-task-card__options-menu">
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setOptionsOpen(false);
-                                        onModify(task);
-                                    }}
-                                >
-                                    Modifier
-                                </button>
+                    {optionsOpen && (
+                        <div className="project-task-card__options-menu">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setOptionsOpen(false);
+                                    onModify(task);
+                                }}
+                            >
+                                Modifier
+                            </button>
 
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        setOptionsOpen(false);
-                                        onCancel(task);
-                                    }}
-                                >
-                                    Supprimer
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                )}
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setOptionsOpen(false);
+                                    onCancel(task);
+                                }}
+                            >
+                                Supprimer
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div className="project-task-card__due-date">

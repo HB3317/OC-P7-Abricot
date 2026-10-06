@@ -460,7 +460,6 @@ export default function SingleProjectView({
                             task={task}
                             projectId={projectId}
                             currentUser={currentUser!}
-                            isOwner={isOwner}
                             onModify={(task) =>
                                 setTaskToModify(task)
                             }
