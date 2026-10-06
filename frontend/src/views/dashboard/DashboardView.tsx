@@ -26,6 +26,31 @@ import "@/styles/pages/dashboard/Dashboard.css";
 
 type DashboardMode = "list" | "kanban";
 
+function getPriorityRank(
+    priority: Task["priority"]
+) {
+    switch (priority) {
+        case "URGENT":
+            return 0;
+        case "HIGH":
+            return 1;
+        case "MEDIUM":
+            return 2;
+        case "LOW":
+            return 3;
+        default:
+            return 4;
+    }
+}
+
+function sortByPriority(tasks: Task[]) {
+    return [...tasks].sort(
+        (a, b) =>
+            getPriorityRank(a.priority) -
+            getPriorityRank(b.priority)
+    );
+}
+
 export default function DashboardView() {
     const [mode, setMode] =
         useState<DashboardMode>("list");
@@ -38,6 +63,9 @@ export default function DashboardView() {
 
     const [tasks, setTasks] =
         useState<Task[]>([]);
+
+    const [searchTerm, setSearchTerm] =
+        useState("");
 
     const [selectedTask, setSelectedTask] =
         useState<Task | null>(null);
@@ -225,6 +253,44 @@ export default function DashboardView() {
     };
 
 
+    const normalizedSearchTerm =
+        searchTerm
+            .trim()
+            .toLocaleLowerCase("fr-FR");
+
+    const searchedTasks =
+        tasks.filter((task) =>
+            task.title
+                .toLocaleLowerCase("fr-FR")
+                .includes(
+                    normalizedSearchTerm
+                )
+        );
+
+    const dashboardListTasks = [
+        ...sortByPriority(
+            searchedTasks.filter(
+                (task) =>
+                    task.status === "TODO" ||
+                    task.status ===
+                        "IN_PROGRESS"
+            )
+        ),
+        ...sortByPriority(
+            searchedTasks.filter(
+                (task) =>
+                    task.status === "DONE"
+            )
+        ),
+        ...sortByPriority(
+            searchedTasks.filter(
+                (task) =>
+                    task.status ===
+                    "CANCELLED"
+            )
+        ),
+    ];
+
     const currentMonthTasks =
         tasks.filter((task) =>
             isTaskInMonth(
@@ -347,6 +413,12 @@ export default function DashboardView() {
                                 type="search"
                                 placeholder="Rechercher une tâche"
                                 aria-label="Rechercher une tâche"
+                                value={searchTerm}
+                                onChange={(event) =>
+                                    setSearchTerm(
+                                        event.target.value
+                                    )
+                                }
                             />
 
                             <Image
@@ -365,7 +437,7 @@ export default function DashboardView() {
                     )}
 
                     <div className="dashboard-list-content">
-                        {tasks.map((task) => (
+                        {dashboardListTasks.map((task) => (
                             <DashboardListCard
                                 key={task.id}
                                 task={task}
