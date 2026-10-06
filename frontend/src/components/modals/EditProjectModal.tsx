@@ -8,6 +8,8 @@ import {
 } from "react";
 import Image from "next/image";
 
+import ConfirmDeleteProjectModal from "@/components/modals/ConfirmDeleteProjectModal";
+
 import { apiRequest } from "@/services/apiClient";
 
 import type {
@@ -23,6 +25,7 @@ type EditProjectModalProps = {
     project?: Project;
     onClose: () => void;
     onSaved: (project: Project) => void;
+    onDeleted?: () => void;
 };
 
 type FormErrors = {
@@ -37,6 +40,7 @@ export default function EditProjectModal({
     project,
     onClose,
     onSaved,
+    onDeleted,
 }: EditProjectModalProps) {
     const [name, setName] = useState(
         mode === "modify" && project
@@ -75,6 +79,17 @@ export default function EditProjectModal({
 
     const [submitting, setSubmitting] =
         useState(false);
+
+    const [
+        deleteConfirmOpen,
+        setDeleteConfirmOpen,
+    ] = useState(false);
+
+    const [deleting, setDeleting] =
+        useState(false);
+
+    const [deleteError, setDeleteError] =
+        useState("");
 
     const contributorsRef =
         useRef<HTMLDivElement>(null);
@@ -203,6 +218,39 @@ export default function EditProjectModal({
                       ? "s"
                       : ""
               }`;
+
+    const handleDelete = async () => {
+        if (!project || deleting) {
+            return;
+        }
+
+        setDeleting(true);
+        setDeleteError("");
+
+        try {
+            await apiRequest<void>(
+                `projects/${project.id}`,
+                {
+                    method: "DELETE",
+                }
+            );
+
+            setDeleteConfirmOpen(false);
+            onClose();
+            onDeleted?.();
+        }
+        catch (error: unknown) {
+            setDeleteError(
+                error instanceof Error
+                    ? error.message
+                    : "Impossible de supprimer le projet."
+            );
+        }
+        finally {
+            setDeleting(false);
+        }
+    };
+
 
     const handleSubmit = async (
         event: FormEvent<HTMLFormElement>
@@ -673,8 +721,48 @@ export default function EditProjectModal({
                               ? "Ajouter un projet"
                               : "Enregistrer"}
                     </button>
+                
+                    {mode === "modify" &&
+                        project && (
+                            <button
+                                type="button"
+                                className="edit-project-delete"
+                                disabled={
+                                    submitting ||
+                                    deleting
+                                }
+                                onClick={() => {
+                                    setDeleteError("");
+                                    setDeleteConfirmOpen(
+                                        true
+                                    );
+                                }}
+                            >
+                                Supprimer le projet
+                            </button>
+                        )}
+
                 </form>
             </section>
+
+            <ConfirmDeleteProjectModal
+                isOpen={deleteConfirmOpen}
+                projectName={
+                    project?.name ?? ""
+                }
+                isDeleting={deleting}
+                error={deleteError}
+                onClose={() => {
+                    if (!deleting) {
+                        setDeleteConfirmOpen(
+                            false
+                        );
+                    }
+                }}
+                onConfirm={() =>
+                    void handleDelete()
+                }
+            />
         </div>
     );
 }

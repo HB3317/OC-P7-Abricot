@@ -527,6 +527,9 @@ export default function SingleProjectView({
                     onSaved={(updatedProject) =>
                         setProject(updatedProject)
                     }
+                    onDeleted={() =>
+                        router.push("/projects")
+                    }
                 />
             )}
 

@@ -282,3 +282,39 @@
         max-height: 180px;
     }
 }
+
+
+.edit-project-delete {
+    display: block;
+
+    min-height: 44px;
+
+    margin-top: 18px;
+    padding: 0 18px;
+
+    border: 1px solid #dc2626;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #dc2626;
+
+    font: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.edit-project-delete:hover {
+    background: #fef2f2;
+}
+
+.edit-project-delete:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+    .edit-project-delete {
+        width: 100%;
+    }
+}
