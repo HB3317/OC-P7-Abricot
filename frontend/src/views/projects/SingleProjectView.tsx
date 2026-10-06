@@ -30,6 +30,155 @@ type SingleProjectViewProps = {
     projectId: string;
 };
 
+type TaskSortMode =
+    | "status"
+    | "assignee"
+    | "dueDate";
+
+const taskSortLabels: Record<
+    TaskSortMode,
+    string
+> = {
+    status: "Statut",
+    assignee: "Affecté à",
+    dueDate: "Date d'échéance",
+};
+
+function getPriorityRank(
+    priority: Task["priority"]
+) {
+    switch (priority) {
+        case "URGENT":
+            return 0;
+        case "HIGH":
+            return 1;
+        case "MEDIUM":
+            return 2;
+        case "LOW":
+            return 3;
+        default:
+            return 4;
+    }
+}
+
+function getStatusRank(
+    status: Task["status"]
+) {
+    switch (status) {
+        case "TODO":
+            return 0;
+        case "IN_PROGRESS":
+            return 1;
+        case "DONE":
+            return 2;
+        case "CANCELLED":
+            return 3;
+        default:
+            return 4;
+    }
+}
+
+function getAssigneeSortKey(
+    task: Task
+) {
+    return task.assignees
+        .map((assignee) =>
+            (
+                assignee.user?.name?.trim() ||
+                assignee.name?.trim() ||
+                assignee.user?.email ||
+                assignee.email ||
+                ""
+            ).toLocaleLowerCase("fr-FR")
+        )
+        .sort((a, b) =>
+            a.localeCompare(
+                b,
+                "fr",
+                {
+                    sensitivity: "base",
+                }
+            )
+        )[0] ?? "";
+}
+
+function sortProjectTasks(
+    tasks: Task[],
+    mode: TaskSortMode
+) {
+    return [...tasks].sort(
+        (a, b) => {
+            if (mode === "status") {
+                const statusDifference =
+                    getStatusRank(a.status) -
+                    getStatusRank(b.status);
+
+                if (statusDifference !== 0) {
+                    return statusDifference;
+                }
+
+                return (
+                    getPriorityRank(
+                        a.priority
+                    ) -
+                    getPriorityRank(
+                        b.priority
+                    )
+                );
+            }
+
+            if (mode === "assignee") {
+                const assigneeDifference =
+                    getAssigneeSortKey(a)
+                        .localeCompare(
+                            getAssigneeSortKey(b),
+                            "fr",
+                            {
+                                sensitivity:
+                                    "base",
+                            }
+                        );
+
+                if (
+                    assigneeDifference !== 0
+                ) {
+                    return assigneeDifference;
+                }
+
+                return (
+                    getPriorityRank(
+                        a.priority
+                    ) -
+                    getPriorityRank(
+                        b.priority
+                    )
+                );
+            }
+
+            const aDate = a.dueDate
+                ? new Date(
+                      a.dueDate
+                  ).getTime()
+                : Number.POSITIVE_INFINITY;
+
+            const bDate = b.dueDate
+                ? new Date(
+                      b.dueDate
+                  ).getTime()
+                : Number.POSITIVE_INFINITY;
+
+            if (aDate !== bDate) {
+                return aDate - bDate;
+            }
+
+            return (
+                getPriorityRank(a.priority) -
+                getPriorityRank(b.priority)
+            );
+        }
+    );
+}
+
 function getInitials(user: User) {
     const value =
         user.name?.trim() || user.email;
@@ -49,6 +198,11 @@ export default function SingleProjectView({
 
     const taskScrollHandled =
         useRef(false);
+
+    const sortMenuRef =
+        useRef<HTMLDivElement | null>(
+            null
+        );
 
     const [iaModalOpen, setIaModalOpen] =
         useState(false);
@@ -71,12 +225,77 @@ export default function SingleProjectView({
     const [tasks, setTasks] =
         useState<Task[]>([]);
 
+    const [searchTerm, setSearchTerm] =
+        useState("");
+
+    const [sortMode, setSortMode] =
+        useState<TaskSortMode>(
+            "status"
+        );
+
+    const [sortOpen, setSortOpen] =
+        useState(false);
+
     const [error, setError] =
         useState("");
 
     useEffect(() => {
         taskScrollHandled.current = false;
     }, [projectId]);
+
+    useEffect(() => {
+        if (!sortOpen) {
+            return;
+        }
+
+        const handlePointerDown = (
+            event: PointerEvent
+        ) => {
+            const target = event.target;
+
+            if (!(target instanceof Node)) {
+                return;
+            }
+
+            if (
+                !sortMenuRef.current?.contains(
+                    target
+                )
+            ) {
+                setSortOpen(false);
+            }
+        };
+
+        const handleKeyDown = (
+            event: KeyboardEvent
+        ) => {
+            if (event.key === "Escape") {
+                setSortOpen(false);
+            }
+        };
+
+        document.addEventListener(
+            "pointerdown",
+            handlePointerDown
+        );
+
+        document.addEventListener(
+            "keydown",
+            handleKeyDown
+        );
+
+        return () => {
+            document.removeEventListener(
+                "pointerdown",
+                handlePointerDown
+            );
+
+            document.removeEventListener(
+                "keydown",
+                handleKeyDown
+            );
+        };
+    }, [sortOpen]);
 
     useEffect(() => {
         const loadProject = async () => {
@@ -203,6 +422,50 @@ export default function SingleProjectView({
         project && currentUser
             ? tasks
             : [];
+
+    const normalizedSearchTerm =
+        searchTerm
+            .trim()
+            .toLocaleLowerCase("fr-FR");
+
+    const displayedTasks =
+        sortProjectTasks(
+            visibleTasks.filter(
+                (task) => {
+                    const matchesTitle =
+                        task.title
+                            .toLocaleLowerCase(
+                                "fr-FR"
+                            )
+                            .includes(
+                                normalizedSearchTerm
+                            );
+
+                    const matchesAssignee =
+                        task.assignees.some(
+                            (assignee) =>
+                                (
+                                    assignee.user
+                                        ?.name ||
+                                    assignee.name ||
+                                    ""
+                                )
+                                    .toLocaleLowerCase(
+                                        "fr-FR"
+                                    )
+                                    .includes(
+                                        normalizedSearchTerm
+                                    )
+                        );
+
+                    return (
+                        matchesTitle ||
+                        matchesAssignee
+                    );
+                }
+            ),
+            sortMode
+        );
 
     useEffect(() => {
         if (
@@ -388,7 +651,11 @@ export default function SingleProjectView({
                         </h2>
 
                         <p>
-                            Par ordre de priorité
+                            Tri : {
+                                taskSortLabels[
+                                    sortMode
+                                ]
+                            }
                         </p>
                     </div>
 
@@ -422,25 +689,96 @@ export default function SingleProjectView({
                             </button>
                         </div>
 
-                        <button
-                            type="button"
-                            className="single-project-status"
+                        <div
+                            ref={sortMenuRef}
+                            className="single-project-sort"
                         >
-                            Statut
+                            <button
+                                type="button"
+                                className="single-project-status"
+                                aria-haspopup="menu"
+                                aria-expanded={
+                                    sortOpen
+                                }
+                                onClick={() =>
+                                    setSortOpen(
+                                        (current) =>
+                                            !current
+                                    )
+                                }
+                            >
+                                {
+                                    taskSortLabels[
+                                        sortMode
+                                    ]
+                                }
 
-                            <Image
-                                src="/icons/select-list-icon.svg"
-                                width={18}
-                                height={18}
-                                alt=""
-                            />
-                        </button>
+                                <Image
+                                    src="/icons/select-list-icon.svg"
+                                    width={18}
+                                    height={18}
+                                    alt=""
+                                />
+                            </button>
+
+                            {sortOpen && (
+                                <div
+                                    className="single-project-sort-menu"
+                                    role="menu"
+                                >
+                                    {(
+                                        [
+                                            "status",
+                                            "assignee",
+                                            "dueDate",
+                                        ] as TaskSortMode[]
+                                    ).map(
+                                        (mode) => (
+                                            <button
+                                                key={
+                                                    mode
+                                                }
+                                                type="button"
+                                                role="menuitem"
+                                                className={
+                                                    sortMode ===
+                                                    mode
+                                                        ? "active"
+                                                        : ""
+                                                }
+                                                onClick={() => {
+                                                    setSortMode(
+                                                        mode
+                                                    );
+
+                                                    setSortOpen(
+                                                        false
+                                                    );
+                                                }}
+                                            >
+                                                {
+                                                    taskSortLabels[
+                                                        mode
+                                                    ]
+                                                }
+                                            </button>
+                                        )
+                                    )}
+                                </div>
+                            )}
+                        </div>
 
                         <div className="single-project-search">
                             <input
                                 type="search"
                                 placeholder="Rechercher une tâche"
                                 aria-label="Rechercher une tâche"
+                                value={searchTerm}
+                                onChange={(event) =>
+                                    setSearchTerm(
+                                        event.target.value
+                                    )
+                                }
                             />
 
                             <Image
@@ -454,7 +792,7 @@ export default function SingleProjectView({
                 </div>
 
                 <div className="single-project-task-list">
-                    {visibleTasks.map((task) => (
+                    {displayedTasks.map((task) => (
                         <ProjectTaskCard
                             key={task.id}
                             task={task}
