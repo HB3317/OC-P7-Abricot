@@ -11,6 +11,7 @@ import Image from "next/image";
 import ConfirmDeleteProjectModal from "@/components/modals/ConfirmDeleteProjectModal";
 
 import { apiRequest } from "@/services/apiClient";
+import { useModalKeyboardAccessibility } from "@/hooks/useModalKeyboardAccessibility";
 
 import type {
     Project,
@@ -93,6 +94,16 @@ export default function EditProjectModal({
 
     const contributorsRef =
         useRef<HTMLDivElement>(null);
+
+    const modalRef = useRef<HTMLElement>(null);
+
+    useModalKeyboardAccessibility({
+        isOpen,
+        isActive: isOpen && !deleteConfirmOpen,
+        containerRef: modalRef,
+        onClose,
+        escapeEnabled: !submitting && !deleting,
+    });
 
     useEffect(() => {
         if (!isOpen) {
@@ -459,10 +470,14 @@ export default function EditProjectModal({
     return (
         <div className="create-project-overlay">
             <section
+                ref={modalRef}
                 className="create-project-modal"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="edit-project-title"
+                aria-hidden={deleteConfirmOpen ? true : undefined}
+                inert={deleteConfirmOpen}
+                tabIndex={-1}
             >
                 <button
                     type="button"

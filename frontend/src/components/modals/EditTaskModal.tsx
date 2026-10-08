@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 
 import { apiRequest } from "@/services/apiClient";
+import { useModalKeyboardAccessibility } from "@/hooks/useModalKeyboardAccessibility";
 
 import type {
     Task,
@@ -105,6 +106,15 @@ export default function EditTaskModal({
 
     const assigneesRef =
         useRef<HTMLDivElement>(null);
+
+    const modalRef = useRef<HTMLElement>(null);
+
+    useModalKeyboardAccessibility({
+        isOpen,
+        containerRef: modalRef,
+        onClose,
+        escapeEnabled: !submitting,
+    });
 
 
     useEffect(() => {
@@ -284,10 +294,12 @@ export default function EditTaskModal({
     return (
         <div className="edit-task-overlay">
             <section
+                ref={modalRef}
                 className="edit-task-modal"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="edit-task-title"
+                tabIndex={-1}
             >
                 <button
                     type="button"

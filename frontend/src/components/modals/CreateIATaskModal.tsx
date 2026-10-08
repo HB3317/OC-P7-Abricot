@@ -2,11 +2,13 @@
 
 import {
     useEffect,
+    useRef,
     useState,
 } from "react";
 import Image from "next/image";
 
 import IATaskListModal from "@/components/modals/IATaskListModal";
+import { useModalKeyboardAccessibility } from "@/hooks/useModalKeyboardAccessibility";
 
 import "@/styles/components/modals/IATaskModal.css";
 
@@ -21,6 +23,15 @@ export default function CreateIATaskModal({
 }: CreateIATaskModalProps) {
     const [showList, setShowList] =
         useState(false);
+
+    const modalRef = useRef<HTMLElement>(null);
+
+    useModalKeyboardAccessibility({
+        isOpen,
+        isActive: isOpen && !showList,
+        containerRef: modalRef,
+        onClose,
+    });
 
     useEffect(() => {
         if (!isOpen) {
@@ -56,6 +67,8 @@ export default function CreateIATaskModal({
                 />
             ) : (
                 <section
+                    ref={modalRef}
+                    tabIndex={-1}
                     className="ia-task-modal ia-task-modal--create"
                     role="dialog"
                     aria-modal="true"

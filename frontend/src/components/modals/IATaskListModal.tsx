@@ -1,8 +1,10 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 
 import IATaskCard from "@/components/cards/IATaskCard";
+import { useModalKeyboardAccessibility } from "@/hooks/useModalKeyboardAccessibility";
 
 type IATaskListModalProps = {
     onClose: () => void;
@@ -11,8 +13,18 @@ type IATaskListModalProps = {
 export default function IATaskListModal({
     onClose,
 }: IATaskListModalProps) {
+    const modalRef = useRef<HTMLElement>(null);
+
+    useModalKeyboardAccessibility({
+        isOpen: true,
+        containerRef: modalRef,
+        onClose,
+    });
+
     return (
         <section
+            ref={modalRef}
+            tabIndex={-1}
             className="ia-task-modal ia-task-modal--list"
             role="dialog"
             aria-modal="true"

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useRef } from "react";
+import { useModalKeyboardAccessibility } from "@/hooks/useModalKeyboardAccessibility";
 
 import "@/styles/components/modals/ConfirmDeleteProjectModal.css";
 
@@ -21,38 +22,14 @@ export default function ConfirmDeleteProjectModal({
     onClose,
     onConfirm,
 }: ConfirmDeleteProjectModalProps) {
-    useEffect(() => {
-        if (!isOpen) {
-            return;
-        }
+    const modalRef = useRef<HTMLElement>(null);
 
-        const handleKeyDown = (
-            event: KeyboardEvent
-        ) => {
-            if (
-                event.key === "Escape" &&
-                !isDeleting
-            ) {
-                onClose();
-            }
-        };
-
-        document.addEventListener(
-            "keydown",
-            handleKeyDown
-        );
-
-        return () => {
-            document.removeEventListener(
-                "keydown",
-                handleKeyDown
-            );
-        };
-    }, [
+    useModalKeyboardAccessibility({
         isOpen,
-        isDeleting,
+        containerRef: modalRef,
         onClose,
-    ]);
+        escapeEnabled: !isDeleting,
+    });
 
     if (!isOpen) {
         return null;
@@ -72,6 +49,8 @@ export default function ConfirmDeleteProjectModal({
             }}
         >
             <section
+                ref={modalRef}
+                tabIndex={-1}
                 className="confirm-delete-project-modal"
                 role="alertdialog"
                 aria-modal="true"

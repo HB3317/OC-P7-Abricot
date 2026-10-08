@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import DashboardListCard from "@/components/cards/DashboardListCard";
@@ -10,6 +10,7 @@ import CreateProjectModal from "@/components/modals/CreateProjectModal";
 import EditTaskModal from "@/components/modals/EditTaskModal";
 
 import { apiRequest } from "@/services/apiClient";
+import { useModalKeyboardAccessibility } from "@/hooks/useModalKeyboardAccessibility";
 
 import type {
     Project,
@@ -84,34 +85,14 @@ export default function DashboardView() {
         setCreateProjectOpen,
     ] = useState(false);
 
-    useEffect(() => {
-        if (
-            !selectedTask ||
-            taskToModify
-        ) {
-            return;
-        }
+    const taskDialogRef = useRef<HTMLDivElement>(null);
 
-        const handleKeyDown = (
-            event: KeyboardEvent
-        ) => {
-            if (event.key === "Escape") {
-                setSelectedTask(null);
-            }
-        };
-
-        document.addEventListener(
-            "keydown",
-            handleKeyDown
-        );
-
-        return () => {
-            document.removeEventListener(
-                "keydown",
-                handleKeyDown
-            );
-        };
-    }, [selectedTask, taskToModify]);
+    useModalKeyboardAccessibility({
+        isOpen: Boolean(selectedTask),
+        isActive: Boolean(selectedTask && !taskToModify),
+        containerRef: taskDialogRef,
+        onClose: () => setSelectedTask(null),
+    });
 
     useEffect(() => {
         apiRequest<{ user: User }>(
@@ -566,10 +547,12 @@ export default function DashboardView() {
                         }}
                     >
                         <div
+                            ref={taskDialogRef}
                             className="dashboard-task-modal"
                             role="dialog"
                             aria-modal="true"
                             aria-label={`Détails de la tâche ${selectedTask.title}`}
+                            tabIndex={-1}
                         >
                             <ProjectTaskCard
                                 key={
