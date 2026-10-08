@@ -99,7 +99,7 @@ export default function LoginView() {
 
             <section className="auth-panel">
                 <Image
-                    src="/assets/logo-abricot.svg"
+                    src="/assets/logo-abricot-orange.svg"
                     width={253}
                     height={32}
                     alt="Abricot"

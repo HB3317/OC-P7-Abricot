@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    useEffect,
     useState,
 } from "react";
 import Image from "next/image";
@@ -20,6 +21,23 @@ export default function CreateIATaskModal({
 }: CreateIATaskModalProps) {
     const [showList, setShowList] =
         useState(false);
+
+    useEffect(() => {
+        if (!isOpen) {
+            return;
+        }
+
+        const previousOverflow =
+            document.body.style.overflow;
+
+        document.body.style.overflow =
+            "hidden";
+
+        return () => {
+            document.body.style.overflow =
+                previousOverflow;
+        };
+    }, [isOpen]);
 
     if (!isOpen) {
         return null;

@@ -250,40 +250,6 @@
     opacity: 0.7;
 }
 
-@media (max-width: 640px) {
-    .create-project-overlay {
-        padding: 12px;
-    }
-
-    .create-project-modal {
-        min-height: 0;
-        max-height: calc(100vh - 24px);
-
-        padding: 68px 24px 32px;
-    }
-
-    .create-project-close {
-        top: 22px;
-        right: 22px;
-    }
-
-    .create-project-modal h2 {
-        margin-bottom: 36px;
-
-        font-size: 24px;
-    }
-
-    .create-project-submit {
-        width: 100%;
-        margin-top: 40px;
-    }
-
-    .contributors-dropdown {
-        max-height: 180px;
-    }
-}
-
-
 .edit-project-delete {
     display: block;
 
@@ -314,7 +280,77 @@
 }
 
 @media (max-width: 640px) {
+    .create-project-overlay {
+        padding: 12px;
+    }
+
+    .create-project-modal {
+        min-height: 0;
+        max-height: calc(100vh - 24px);
+
+        padding: 68px 24px 32px;
+    }
+
+    .create-project-close {
+        top: 22px;
+        right: 22px;
+    }
+
+    .create-project-modal h2 {
+        margin-bottom: 36px;
+        font-size: 24px;
+    }
+
+    .create-project-submit,
     .edit-project-delete {
         width: 100%;
+    }
+
+    .create-project-submit {
+        margin-top: 40px;
+    }
+
+    .contributors-dropdown {
+        max-height: 180px;
+    }
+}
+
+/* Écrans peu hauts / smartphone paysage */
+
+@media (max-height: 600px) {
+    .create-project-overlay {
+        align-items: start;
+        padding: 8px 12px;
+        overflow: hidden;
+    }
+
+    .create-project-modal {
+        min-height: 0;
+        height: calc(100dvh - 16px);
+        max-height: calc(100dvh - 16px);
+
+        padding: 48px 32px 24px;
+
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .create-project-close {
+        top: 16px;
+        right: 20px;
+    }
+
+    .create-project-modal h2 {
+        margin-bottom: 24px;
+        font-size: 22px;
+    }
+
+    .create-project-field {
+        margin-bottom: 16px;
+    }
+
+    .create-project-submit {
+        margin-top: 28px;
     }
 }

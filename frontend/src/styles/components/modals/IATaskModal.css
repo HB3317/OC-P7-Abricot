@@ -3,10 +3,15 @@
     inset: 0;
     z-index: 1000;
 
+    box-sizing: border-box;
+
     display: grid;
     place-items: center;
 
     padding: 20px;
+
+    overflow: hidden;
+    overscroll-behavior: none;
 
     background: rgb(15 15 15 / 35%);
 }
@@ -20,9 +25,11 @@
     flex-direction: column;
 
     width: min(598px, 100%);
-    max-height: calc(100vh - 40px);
+    max-height: calc(100dvh - 24px);
 
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 
     border-radius: 10px;
 
@@ -30,26 +37,27 @@
 }
 
 .ia-task-modal--create {
-    min-height: 797px;
+    min-height: 0;
+    height: auto;
 
-    padding:
-        84px
-        52px
-        77px;
+    padding: 72px 52px 48px;
 }
 
 .ia-task-modal--list {
-    min-height: 859px;
+    min-height: 0;
+    height: calc(100dvh - 24px);
+    max-height: 859px;
 
-    padding:
-        84px
-        52px
-        39px;
+    padding: 84px 52px 39px;
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 .ia-task-modal__close {
     position: absolute;
-
     top: 36px;
     right: 37px;
 
@@ -68,10 +76,14 @@
     cursor: pointer;
 }
 
+.ia-task-modal--create .ia-task-modal__close {
+    top: 28px;
+    right: 32px;
+}
+
 .ia-task-modal__title {
     display: flex;
     align-items: center;
-
     gap: 10px;
 }
 
@@ -96,20 +108,19 @@
     min-height: 61px;
 
     margin-top: auto;
-    padding:
-        0
-        30px
-        0
-        32px;
+    padding: 0 30px 0 32px;
 
     border-radius: 999px;
 
     background: #f8f9fa;
 }
 
+.ia-task-modal--create .ia-task-prompt {
+    margin-top: 56px;
+}
+
 .ia-task-prompt > span {
     color: #1f1f1f;
-
     font-size: 10px;
 }
 
@@ -132,7 +143,6 @@
 .ia-task-list {
     display: flex;
     flex-direction: column;
-
     gap: 24px;
 
     margin-top: 42px;
@@ -158,30 +168,13 @@
     cursor: pointer;
 }
 
-.ia-task-modal--list
-.ia-task-prompt {
+.ia-task-modal--list .ia-task-prompt {
     margin-top: 48px;
 }
 
 @media (max-width: 640px) {
     .ia-task-overlay {
         padding: 12px;
-    }
-
-    .ia-task-modal {
-        max-height:
-            calc(100vh - 24px);
-    }
-
-    .ia-task-modal--create,
-    .ia-task-modal--list {
-        min-height:
-            calc(100vh - 24px);
-
-        padding:
-            72px
-            24px
-            28px;
     }
 
     .ia-task-modal__close {
@@ -193,23 +186,108 @@
         font-size: 23px;
     }
 
+    .ia-task-prompt {
+        padding: 0 20px;
+    }
+
+    .ia-task-prompt > span {
+        max-width: calc(100% - 40px);
+    }
+
+    .ia-task-modal--create {
+        min-height: 0;
+        height: auto;
+        max-height: calc(100dvh - 24px);
+
+        padding: 56px 24px 24px;
+
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .ia-task-modal--create .ia-task-modal__close {
+        top: 20px;
+        right: 20px;
+    }
+
+    .ia-task-modal--create .ia-task-prompt {
+        margin-top: 32px;
+    }
+
+    .ia-task-modal--list {
+        min-height: 0;
+        height: calc(100dvh - 24px);
+
+        padding: 72px 24px 28px;
+    }
+
     .ia-task-list {
         margin-top: 36px;
     }
 
-    .ia-task-modal--list
-    .ia-task-prompt {
+    .ia-task-modal--list .ia-task-prompt {
         margin-top: 36px;
     }
 
-    .ia-task-prompt {
-        padding:
-            0
-            20px;
+    .ia-task-modal--list .ia-task-list,
+    .ia-task-modal--list .ia-task-prompt,
+    .ia-task-modal--list .ia-task-list__add,
+    .ia-task-modal--list .ia-task-modal__title,
+    .ia-task-modal--list .ia-task-card {
+        flex-shrink: 0;
+    }
+}
+
+@media (max-height: 500px) {
+    .ia-task-overlay {
+        place-items: start center;
+        padding: 8px 12px;
     }
 
-    .ia-task-prompt > span {
-        max-width:
-            calc(100% - 40px);
+    .ia-task-modal {
+        min-height: 0;
+        max-height: calc(100dvh - 16px);
+
+        margin: 0;
+
+        overflow-y: auto;
+    }
+
+    .ia-task-modal__close {
+        top: 18px;
+        right: 20px;
+    }
+
+    .ia-task-modal--create {
+        padding: 72px 52px 48px;
+    }
+
+    .ia-task-modal--create .ia-task-modal__close {
+        top: 28px;
+        right: 32px;
+    }
+
+    .ia-task-modal--list {
+        height: calc(100dvh - 16px);
+        max-height: calc(100dvh - 16px);
+
+        padding: 48px 24px 20px;
+    }
+}
+
+@media (max-width: 640px) and (max-height: 500px) {
+    .ia-task-modal--create {
+        max-height: calc(100dvh - 24px);
+        padding: 56px 24px 24px;
+    }
+
+    .ia-task-modal--create .ia-task-modal__close {
+        top: 20px;
+        right: 20px;
+    }
+
+    .ia-task-modal--list .ia-task-modal__close {
+        top: 18px;
+        right: 20px;
     }
 }

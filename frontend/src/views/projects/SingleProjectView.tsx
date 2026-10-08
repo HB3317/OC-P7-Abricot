@@ -650,45 +650,9 @@ export default function SingleProjectView({
                             Tâches
                         </h2>
 
-                        <p>
-                            Tri : {
-                                taskSortLabels[
-                                    sortMode
-                                ]
-                            }
-                        </p>
                     </div>
 
                     <div className="single-project-task-controls">
-                        <div className="single-project-view-selector">
-                            <button
-                                type="button"
-                                className="active"
-                            >
-                                <Image
-                                    src="/icons/list-icon.svg"
-                                    width={16}
-                                    height={16}
-                                    alt=""
-                                />
-
-                                Liste
-                            </button>
-
-                            <button
-                                type="button"
-                            >
-                                <Image
-                                    src="/icons/calendar-icon.svg"
-                                    width={16}
-                                    height={16}
-                                    alt=""
-                                />
-
-                                Calendrier
-                            </button>
-                        </div>
-
                         <div
                             ref={sortMenuRef}
                             className="single-project-sort"

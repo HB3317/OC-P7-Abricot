@@ -277,14 +277,6 @@
     font-weight: 500;
 }
 
-.single-project-tasks__title p {
-    margin: 9px 0 0;
-
-    color: #6b7280;
-
-    font-size: 13px;
-}
-
 .single-project-task-controls {
     display: flex;
     align-items: center;
@@ -294,35 +286,8 @@
     min-width: 0;
 }
 
-.single-project-view-selector {
-    display: flex;
-    gap: 8px;
 
-    flex: none;
-}
 
-.single-project-view-selector button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-
-    height: 45px;
-
-    padding: 0 16px;
-
-    border: 0;
-    border-radius: 8px;
-
-    background: #ffffff;
-    color: #d3590b;
-
-    font-size: 12px;
-}
-
-.single-project-view-selector button.active {
-    background: #ffe8d9;
-}
 
 .single-project-status {
     display: flex;
@@ -400,6 +365,73 @@
     font-size: 13px;
 }
 
+/* =========================
+   TRI DES TACHES
+   ========================= */
+
+.single-project-sort {
+    position: relative;
+
+    width: 151px;
+
+    flex: none;
+}
+
+.single-project-sort .single-project-status {
+    width: 100%;
+
+    cursor: pointer;
+}
+
+.single-project-sort-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 30;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    padding: 6px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 8px 20px
+        rgb(15 15 15 / 10%);
+}
+
+.single-project-sort-menu button {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 0;
+    border-radius: 5px;
+
+    background: transparent;
+    color: #1f1f1f;
+
+    font: inherit;
+    font-size: 12px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.single-project-sort-menu button:hover,
+.single-project-sort-menu button.active {
+    background: #ffe8d9;
+    color: #d3590b;
+}
+
 
 /* =========================
    TABLETTE
@@ -416,11 +448,10 @@
 
     .single-project-contributors {
         align-items: flex-start;
-
-        padding: 20px 24px;
-
         flex-direction: column;
         gap: 16px;
+
+        padding: 20px 24px;
     }
 
     .single-project-contributors__people {
@@ -482,7 +513,6 @@
 
     .single-project-title > div {
         align-items: flex-start;
-
         flex-direction: column;
         gap: 5px;
     }
@@ -493,7 +523,6 @@
 
     .single-project-title p {
         margin-top: 9px;
-
         font-size: 13px;
     }
 
@@ -531,92 +560,29 @@
         align-items: stretch;
     }
 
-    .single-project-view-selector {
-        width: 100%;
+    .single-project-sort {
+        width: 151px;
+        align-self: flex-start;
     }
 
-    .single-project-view-selector button {
-        flex: 1;
+    .single-project-status {
+        height: 44px;
+        padding: 0 14px;
     }
 
-    .single-project-status,
     .single-project-search {
         width: 100%;
+        height: 44px;
         min-width: 0;
+    }
+
+    .single-project-search input {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 
     .single-project-task-list {
         min-height: 200px;
         margin-top: 28px;
     }
-}
-
-
-
-/* =========================
-   TRI DES TACHES
-   ========================= */
-
-.single-project-sort {
-    position: relative;
-
-    width: 151px;
-
-    flex: none;
-}
-
-.single-project-sort
-.single-project-status {
-    width: 100%;
-
-    cursor: pointer;
-}
-
-.single-project-sort-menu {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    z-index: 30;
-
-    box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-
-    padding: 6px;
-
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 8px 20px
-        rgb(15 15 15 / 10%);
-}
-
-.single-project-sort-menu button {
-    width: 100%;
-
-    padding: 10px 12px;
-
-    border: 0;
-    border-radius: 5px;
-
-    background: transparent;
-    color: #1f1f1f;
-
-    font: inherit;
-    font-size: 12px;
-    text-align: left;
-
-    cursor: pointer;
-}
-
-.single-project-sort-menu button:hover,
-.single-project-sort-menu button.active {
-    background: #ffe8d9;
-    color: #d3590b;
 }

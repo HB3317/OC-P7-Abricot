@@ -172,6 +172,10 @@
 }
 
 .dashboard-list-content {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+
     min-height: 720px;
     margin-top: 41px;
 }
@@ -204,6 +208,7 @@
 .dashboard-kanban-title {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
 .dashboard-kanban-title h2 {
@@ -216,6 +221,10 @@
 }
 
 .dashboard-kanban-content {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+
     margin-top: 41px;
 }
 
@@ -322,22 +331,22 @@
     .dashboard-kanban-column {
         padding: 24px 16px;
     }
-}
 
-.dashboard-list-content {
-    display: flex;
-    flex-direction: column;
-    gap: 17px;
+    .dashboard-task-overlay {
+        align-items: flex-start;
+
+        padding: 20px 10px;
+    }
+
+    .dashboard-task-modal {
+        max-height: calc(100vh - 40px);
+    }
 }
 
 .dashboard-tasks-error {
     margin: 30px 0 0;
     color: #ef4444;
     font-size: 13px;
-}
-
-.dashboard-kanban-title {
-    gap: 15px;
 }
 
 .dashboard-kanban-title > span {
@@ -357,13 +366,6 @@
 
     font-size: 12px;
 }
-
-.dashboard-kanban-content {
-    display: flex;
-    flex-direction: column;
-    gap: 17px;
-}
-
 
 
 /* =========================
@@ -393,16 +395,4 @@
     overflow-y: auto;
 
     border-radius: 10px;
-}
-
-@media (max-width: 800px) {
-    .dashboard-task-overlay {
-        align-items: flex-start;
-
-        padding: 20px 10px;
-    }
-
-    .dashboard-task-modal {
-        max-height: calc(100vh - 40px);
-    }
 }
