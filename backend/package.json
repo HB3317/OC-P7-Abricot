@@ -11,7 +11,7 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
-    "seed": "ts-node scripts/seed.ts",
+    "seed": "node -r dotenv/config -r ts-node/register scripts/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -49,5 +49,15 @@
     "prisma": "^6.19.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "qs": "6.16.0",
+    "deepmerge-ts": "8.0.2"
+  },
+  "allowScripts": {
+    "@prisma/client@6.19.3": true,
+    "@prisma/engines@6.19.3": true,
+    "prisma@6.19.3": true,
+    "@scarf/scarf": false
   }
 }
