@@ -46,9 +46,26 @@ export default function LoginView() {
         event.preventDefault();
 
         setError("");
-        setLoading(true);
 
         const form = new FormData(event.currentTarget);
+        const email = String(form.get("email") ?? "").trim();
+        const password = String(form.get("password") ?? "");
+
+        if (!email || !password.trim()) {
+            setError("Veuillez remplir tous les champs obligatoires.");
+            return;
+        }
+
+        const emailInput = event.currentTarget.elements.namedItem(
+            "email"
+        ) as HTMLInputElement | null;
+
+        if (emailInput && !emailInput.validity.valid) {
+            setError("Veuillez saisir une adresse email valide.");
+            return;
+        }
+
+        setLoading(true);
 
         try {
             const response = await fetch(
@@ -109,6 +126,7 @@ export default function LoginView() {
                 <form
                     className="auth-form"
                     onSubmit={handleSubmit}
+                    noValidate
                 >
                     <h1 className="auth-title">
                         Connexion

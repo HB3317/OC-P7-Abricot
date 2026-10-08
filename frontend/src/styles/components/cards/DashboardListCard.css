@@ -35,7 +35,7 @@
 
     overflow: hidden;
 
-    color: #6b7280;
+    color: #4b5563;
 
     font-size: 12px;
     line-height: 1.35;
@@ -62,7 +62,7 @@
 
     min-width: 0;
 
-    color: #6b7280;
+    color: #4b5563;
 
     font-size: 11px;
 
@@ -117,7 +117,7 @@
 
 .dashboard-list-card__status--todo {
     background: #ffe0e0;
-    color: #ef4444;
+    color: #b91c1c;
 }
 
 .dashboard-list-card__status--progress {
@@ -127,12 +127,12 @@
 
 .dashboard-list-card__status--done {
     background: #f1fff7;
-    color: #27ae60;
+    color: #15803d;
 }
 
 .dashboard-list-card__status--cancelled {
     background: #e5e7eb;
-    color: #6b7280;
+    color: #4b5563;
 }
 
 .dashboard-list-card__view {

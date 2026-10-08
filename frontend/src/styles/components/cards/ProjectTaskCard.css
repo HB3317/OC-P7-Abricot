@@ -43,7 +43,7 @@
 .project-task-card__heading > p {
     margin: 8px 0 0;
 
-    color: #6b7280;
+    color: #4b5563;
 
     font-size: 13px;
     line-height: 1.4;
@@ -65,22 +65,22 @@
 
 .project-task-card__status--todo {
     background: #ffe0e0;
-    color: #ef4444;
+    color: #b91c1c;
 }
 
 .project-task-card__status--progress {
     background: #fff0d7;
-    color: #e08d00;
+    color: #995c00;
 }
 
 .project-task-card__status--done {
     background: #f1fff7;
-    color: #27ae60;
+    color: #15803d;
 }
 
 .project-task-card__status--cancelled {
     background: #e5e7eb;
-    color: #6b7280;
+    color: #4b5563;
 }
 
 .project-task-card__options {
@@ -110,9 +110,9 @@
 
     margin-top: 29px;
 
-    color: #6b7280;
+    color: #4b5563;
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .project-task-card__due-date strong {
@@ -129,7 +129,7 @@
 
     margin-top: 24px;
 
-    color: #6b7280;
+    color: #4b5563;
 
     font-size: 11px;
 }
@@ -163,7 +163,7 @@
     background: #e5e7eb;
     color: #1f1f1f;
 
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .project-task-card__avatar--current {
@@ -181,9 +181,9 @@
     border-radius: 999px;
 
     background: #e5e7eb;
-    color: #6b7280;
+    color: #4b5563;
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .project-task-card__divider {
@@ -277,7 +277,7 @@
 .project-task-card__comment-heading span {
     color: #9ca3af;
 
-    font-size: 9px;
+    font-size: 12px;
 
     white-space: nowrap;
 }
@@ -285,7 +285,7 @@
 .project-task-card__comment-content p {
     margin: 14px 0 0;
 
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.4;
 }
 
@@ -335,9 +335,9 @@
 .project-task-card__comment-form small {
     margin-top: 6px;
 
-    color: #ef4444;
+    color: #b91c1c;
 
-    font-size: 11px;
+    font-size: 12px;
 }
 
 .project-task-card__comment-form button {
